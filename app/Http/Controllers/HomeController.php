@@ -28,16 +28,30 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {  
+    {
         // dd(Carbon::today());    
-       $user = User::where('email','!=','admin@gmail.com')->inRandomOrder()->take(4)->get();
-       $dailysales = count(Order::whereDate('created_at','=',Carbon::today())->get());
-       $revenue_today =  DB::table('orders')->selectRaw('sum(total_amount)')->whereDate('created_at',Carbon::today())->pluck('sum(total_amount)');
-       $products = count(Product::where('quantity','>',0)->orWhere('status','=','active')->get());
-       // dd($products);
+        $user = User::where('email', '!=', 'admin@gmail.com')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
 
-      
-       
-        return view('backend.index',compact('user','dailysales','revenue_today','products'));
+        $dailysales = count(
+            Order::whereDate('created_at', '=', Carbon::today())
+                ->get()
+        );
+
+        $revenue_today =  DB::table('orders')
+            ->selectRaw('sum(total_amount)')
+            ->whereDate('created_at', Carbon::today())
+            ->pluck('sum(total_amount)');
+            
+        $products = count(Product::where('quantity', '>', 0)
+            ->orWhere('status', '=', 'active')
+            ->get());
+        // dd($products);
+
+
+
+        return view('backend.index', compact('user', 'dailysales', 'revenue_today', 'products'));
     }
 }

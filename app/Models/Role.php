@@ -1,7 +1,7 @@
 <?php
 
-namespace App;
-use App\User;
+namespace App\Models;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
@@ -11,7 +11,7 @@ class Role extends Model
 
     public function user()
     {
-    	return $this->belongsToMany('App\User','role_users');
+    	return $this->belongsToMany(User::class,'role_users');
     }
 
     public function hasAccess()

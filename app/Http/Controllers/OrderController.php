@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Product;
-use App\Customer;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Customer;
 use Carbon\Carbon;
-use App\OrderProduct;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Product;
-use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -48,6 +46,8 @@ class HomeController extends Controller
         $products = count(Product::where('quantity', '>', 0)
             ->orWhere('status', '=', 'active')
             ->get());
+
+            // dd($revenue_today);
         // dd($products);
 
 

@@ -14,9 +14,9 @@ class RoleUsers extends Migration
     public function up()
     {
            Schema::create('role_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('role_id');
+            $table->id('id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('role_id')->constrained('roles');
             $table->timestamps();
 
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

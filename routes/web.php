@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::resource('category','CategoryController');
 	Route::resource('permission','PermissionController');
 	Route::resource('brand','BrandController');
-	Route::resource('product','ProductController');
+	Route::resource('product',ProductController::class);
 	Route::resource('customer','CustomerController');
 	Route::resource('order','OrderController');
 

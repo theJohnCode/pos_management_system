@@ -24,8 +24,10 @@
                                         
                                     </div>
                                     @endif
-                                    <form role="form" action=@if(isset($product) )
-                                    "{{route('product.update',$product->id)}}" @else() "{{route('product.store')}}" @endif method="post" >
+                                    <form 
+                                    role="form" 
+                                    action={{isset($product) ? route("product.update",$product->id) : route("product.store") }}
+                                    method="post" >
                                     @if (isset($product))
                                         @method('PUT')
                                     @endif
@@ -129,7 +131,7 @@
                 
                 <select name="brands" id="brands" class="form-control" required="required">
                     
-                 
+                 <option value="">Select</option>
                  </select>                                   
 
                                         

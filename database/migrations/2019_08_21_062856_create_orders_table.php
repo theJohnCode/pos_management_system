@@ -14,12 +14,12 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('customer_id');
+            $table->id('id');
+            $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->string('total_amount');
             $table->string('discount');
-            $table->string('payment_method');
-            $table->string('order_status');
+            $table->enum('payment_method',['cash','card','transfer']);
+            $table->enum('order_status',['successful','pending','failed']);
             $table->string('cashier_name');
             $table->timestamps();
         });

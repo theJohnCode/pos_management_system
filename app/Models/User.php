@@ -1,14 +1,17 @@
 <?php
 
-namespace App;
-use App\Role;
+namespace App\Models;
+
+use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,
+        HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','thumbnail'
+        'name', 'email', 'password', 'thumbnail'
     ];
 
     /**
@@ -38,11 +41,13 @@ class User extends Authenticatable
     ];
 
 
-    public function role(){
-        return $this->belongsToMany('App\Role','role_users','user_id','role_id');
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
     }
 
-    public function isSuperAdmin(){
+    public function isSuperAdmin()
+    {
         return  $this->id == 1;
     }
 
@@ -50,28 +55,20 @@ class User extends Authenticatable
     public function hasAccess(array $permission)
     {
 
-       $array = array();
+        $array = array();
 
-        foreach($this->role as $role)
-        {
+        foreach ($this->role as $role) {
             $permissions = $role->hasAccess();
-            foreach($permissions as $key=>$value)
-            {
+            foreach ($permissions as $key => $value) {
                 $array[]  = ($key);
             }
-            
         }
-            
-            $name  = implode($permission);
-            if(in_array($name,$array)){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-    }   
 
-
-    
+        $name  = implode($permission);
+        if (in_array($name, $array)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

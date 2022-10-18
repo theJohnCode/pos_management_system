@@ -14,7 +14,7 @@ class Productfilters extends Migration
     public function up()
     {
         Schema::create('productfilters', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->string('name');
             $table->string('brand');
             $table->string('price');

@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->float('price');
             $table->float('tax');
-            $table->boolean('status')->default(true);
+            $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
 
         });

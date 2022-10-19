@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
             $table->string('total_amount');
             $table->string('discount');
-            $table->enum('payment_method',['cash','card','transfer']);
+            $table->enum('payment_method',['cash','card','transfer','cheque']);
             $table->enum('order_status',['successful','pending','failed']);
             $table->string('cashier_name');
             $table->timestamps();

@@ -21,7 +21,7 @@ class OrderFactory extends Factory
             'customer_id' => Customer::all()->random()->id,
             'total_amount' => $this->faker->unique()->numberBetween(100,2000),
             'discount' => $this->faker->unique()->numberBetween(1,20),
-            'payment_method' => $this->faker->randomElement(['cash','card','transfer']),
+            'payment_method' => $this->faker->randomElement(['cash','card','transfer','cheque']),
             'order_status' => $this->faker->randomElement(['successful','pending','failed']),
             'cashier_name' => $this->faker->name
         ];

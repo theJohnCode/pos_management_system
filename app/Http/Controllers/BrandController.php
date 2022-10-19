@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Brand;
-use App\Category;
+use App\Models\Brand;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -24,7 +24,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = Brand::paginate(10);
+        $brands = Brand::latest()->paginate(10);
         return view('backend.brand.index',compact('brands'));
     }
 

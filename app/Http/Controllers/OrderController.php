@@ -50,6 +50,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $customer = Customer::where('number', '=', $request->number)->first();
 
         if (empty($customer)) {
@@ -58,16 +59,19 @@ class OrderController extends Controller
 
         $order = Order::create([
             'customer_id'    => $customer->id,
-            'total_amount'   => $request->net_total,
-            'order_status'   => 'active',
+            'total_amount'   => $request->total_amount,
+            'order_status'   => 'successful',
             'payment_method' => 'cash',
-            'discount'       => (isset($request->dis)) ? $request->dis : '0',
+            'discount'       => (isset($request->discount)) ? $request->discount : '0',
             'cashier_name'   => Auth::user()->name,
             'created_at'     => Carbon::today(),
         ]);
 
         if ($order) {
-            $products = ['products' => $request->products, 'quantity' => $request->quantity];
+            $products = [
+                'products' => $request->products,
+                'quantity' => $request->quantity
+            ];
 
             for ($i = 0; $i < (count($products['products'])); $i++) {
                 OrderProduct::create([
@@ -76,7 +80,7 @@ class OrderController extends Controller
                     'quantity'   => $products['quantity'][$i],
                 ]);
 
-                for ($j = 0; $j < count($products['products']) ; $j++) {
+                for ($j = 0; $j < count($products['products']); $j++) {
                     $product = Product::find($products['products'][$j]);
                     $product->update(
                         ['quantity' =>  $product->quantity - $products['quantity'][$j]]
@@ -85,13 +89,13 @@ class OrderController extends Controller
             }
         }
 
-        return back()->with('success', 'Order #'.$order->id.' Placed Successfully');
+        return back()->with('success', 'Order #' . $order->id . ' Placed Successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
@@ -138,7 +142,10 @@ class OrderController extends Controller
 
     public static function fetch_products()
     {
-        $products = Product::where('quantity', '>', 0)->get();
+        $products = Product::where('quantity', '>', 0)
+            ->where('status', 'active')
+            ->get();
+        // dd($products);
         $output = '';
         foreach ($products as $product) {
             $output .= '<option value="' . $product->id . '">' . $product->name . '</option>';
@@ -149,7 +156,11 @@ class OrderController extends Controller
 
     public function fetch_single_product(Request $request)
     {
-        $product = DB::select('select price,quantity from products where status = 1 AND id = "' . $request->id . '"', [1]);
+        $product = Product::where('id', $request->id)
+            ->where('status', 'active')
+            ->get(['price', 'quantity']);
+
+        // $product = DB::select('select price,quantity from products where status = active AND id = "' . $request->id . '"', [1]);
         return response()->json($product);
     }
 

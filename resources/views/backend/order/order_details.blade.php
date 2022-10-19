@@ -115,7 +115,7 @@
                                          <td class="thick-line"></td>
                                     <td class="thick-line"></td>
                                     <td class="thick-line text-center"><strong>Discount</strong></td>
-                                        <td class="thick-line text-right">Rs {{$order->discount}}</td>
+                                        <td class="thick-line text-right">₦ {{$order->discount}}</td>
                                        
                                     </tr>
                                 @endif
@@ -123,7 +123,7 @@
                                         <td class="no-line"></td>
                                     <td class="no-line"></td>
                                     <td class="no-line text-center"><strong>Total</strong></td>
-                                     <td class="no-line text-right">Rs {{$order->total_amount}}</td>
+                                     <td class="no-line text-right">₦ {{$order->total_amount}}</td>
                                        
                                     </tr>
 

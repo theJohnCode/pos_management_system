@@ -138,12 +138,12 @@
 
         <!-- LOGO -->
         <div class="logo-box">
-            <a href="index.html" class="logo text-center">
+            <a href="#" class="logo text-center">
                 <span class="logo-lg">
-                    <img src="{{asset('theme/assets/images/logo-dark.png')}}" alt="" height="16">
+                    <img src="{{asset('theme/assets/images/logo-dark.png')}}" alt="" height="60">
                 </span>
                 <span class="logo-sm">
-                    <img src="{{asset('theme/assets/images/logo-sm.png')}}" alt="" height="24">
+                    <img src="{{asset('theme/assets/images/logo-sm.png')}}" alt="" height="50">
                 </span>
             </a>
         </div>

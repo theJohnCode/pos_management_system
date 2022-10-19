@@ -83,7 +83,7 @@
                 @can('view-product', User::class)
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-tag"></i>
                             <span> Product</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -98,7 +98,7 @@
                 @can('view-order', User::class)
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-bag"></i>
                             <span> Orders</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -115,7 +115,7 @@
                 @can('view-customer', User::class)
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-themify-favicon"></i>
                             <span>Customer</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -166,7 +166,7 @@
 
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-unlock"></i>
                             <span> Permissions</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -184,7 +184,7 @@
 
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-layers-alt"></i>
                             <span> Category</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -202,7 +202,7 @@
 
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-heart"></i>
                             <span> Brands</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -218,7 +218,7 @@
 
                     <li>
                         <a href="javascript: void(0);">
-                            <i class="ti-flag"></i>
+                            <i class="ti-layout-column4-alt"></i>
                             <span>Print Barcode</span>
                             <span class="menu-arrow"></span>
                         </a>

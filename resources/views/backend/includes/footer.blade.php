@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2016 - {{ date('Y') }} &copy; {{ config('app.name') }} theme by <a href="#">Zain</a>
+                {{ date('Y') }} &copy; {{ config('app.name') }} Designed by<a href="https://ifeanyichukwujohn.me">John Code</a>
             </div>
             <div class="col-md-6">
                 <div class="text-md-right footer-links d-none d-sm-block">

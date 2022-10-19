@@ -122,7 +122,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
-        // dd($user->password);
+        // dd($request->all());
         if ($user->email == $request->email) {
             $validation = 'required';
         } else {
@@ -142,11 +142,20 @@ class UserController extends Controller
             $roles[] = "" . $key . "";
         }
 
+        
+        if ($request->has('image')) {
+            $ext  = $request->image->getClientOriginalExtension();
+            $name = time() . "." . $ext;
+            $request->image->move(public_path('images'), $name);
+        }
+
 
         // inserting user
         $user->name = $request->name;
         $user->email = $request->email ?? $user->email;
         $user->password = (isset($request->password)) ? bcrypt($request->password) : $user->password;
+        $user->thumbnail = isset($name) ? $name : 'dummy.png';
+
 
         $result = $user->update();
 

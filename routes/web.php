@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BarcodeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductfilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +42,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('fetch_customer', [OrderController::class, 'fetch_customer']);
 
 	// custom permission route
-	Route::get('permission/filter', [PermissionController::class,'filter'])->name('permission.filter');
+	Route::get('permission/filter', [PermissionController::class,'fil*prpter'])->name('permission.filter');
 	// Route::get('orders/filter','CustomerController@filter')->name('orders.filter');
 	// custom permission route end here
 
 	// custom customer route
 	Route::get('customer/orders', [CustomerController::class,'orders'])->name('orders.filter');
+	Route::get('product/barcode', [BarcodeController::class,'index'])->name('barcode.index');
+	Route::post('barcode/product', [BarcodeController::class,'fetch_single_product'])->name('barcode.product');
+	Route::get('barcode/print', [BarcodeController::class,'print'])->name('barcode.print');
+	Route::get('barcode/show', [BarcodeController::class,'show'])->name('barcode.show');
 
 	// custom customer route end here
 
@@ -62,13 +68,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 // product filter route
-Route::get('/filters', 'ProductfilterController@index');
-Route::post('/fetch_products', 'ProductfilterController@fetch_products');
+Route::get('/filters', [ProductfilterController::class, 'index']);
+Route::post('/fetch_products', [ProductfilterController::class,'fetch_products']);
 
 
 // product filter route end here
 
 
 // sql testing route
-Route::get('/sql', 'ProductfilterController@sql');
+Route::get('/sql', [ProductfilterController::class,'sql']);
 // sql route end here

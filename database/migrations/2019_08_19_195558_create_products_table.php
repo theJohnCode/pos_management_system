@@ -19,10 +19,13 @@ class CreateProductsTable extends Migration
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
             $table->text('description')->nullable();
+            $table->integer('product_code')->nullable();
+            $table->text('bar_code')->nullable();
+            $table->string('image')->nullable();
             $table->integer('quantity');
             $table->float('price');
             $table->float('tax');
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
         });

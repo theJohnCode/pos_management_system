@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
 
-        $this->middleware('permission:view-role',['only' => ['index']]);
-        $this->middleware('permission:create-role',['only' => ['create','store']]);
-        $this->middleware('permission:update-role',['only' => ['edit','update']]);
-        $this->middleware('permission:delete-role',['only' => ['destroy']]);
-     
+        $this->middleware('permission:view-role', ['only' => ['index']]);
+        $this->middleware('permission:create-role', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-role', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-role', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::paginate(6);
-        return view('backend.roles.index',compact('roles'));
+        return view('backend.roles.index', compact('roles'));
     }
 
     /**
@@ -36,7 +36,7 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = $this->fetchPermissions();
-        return view('backend.roles.create',compact('permissions'));
+        return view('backend.roles.create', compact('permissions'));
     }
 
     /**
@@ -48,8 +48,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
 
-        
-        $request->validate(['role' => 'required|unique:roles,name','permission'=>'required']);
+
+        $request->validate(
+            [
+                'role' => 'required|unique:roles,name',
+                'permission' => 'required'
+            ]
+        );
         $permissions = permissions_filter($request->permission); //replace on with true in permission array
         $result = Role::create([
             'name' => $request->get('role'),
@@ -59,9 +64,8 @@ class RoleController extends Controller
         ]);
 
 
-        if($result)
-        {
-            return back()->with('success','Role Added Successfully');
+        if ($result) {
+            return back()->with('success', 'Role Added Successfully');
         }
     }
 
@@ -85,7 +89,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = $this->fetchPermissions();
-        return view('backend.roles.create',compact('role','permissions'));
+        return view('backend.roles.create', compact('role', 'permissions'));
     }
 
     /**
@@ -98,25 +102,20 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
 
-        if($role->name == $request->role)
-        {
+        if ($role->name == $request->role) {
             $validation = 'required';
-
-        }
-        else
-        {
+        } else {
             $validation = 'required|unique:roles,name';
         }
-       $request->validate(['role' => $validation,'permission'=>'required']);
+        $request->validate(['role' => $validation, 'permission' => 'required']);
 
-       $role->name = $request->role;
-       $role->permissions = permissions_filter($request->permission);
-       $result = $role->update();
+        $role->name = $request->role;
+        $role->permissions = permissions_filter($request->permission);
+        $result = $role->update();
 
-       if($result)
-       {
-        return back()->with('success','Role Updated Successfully');
-       }
+        if ($result) {
+            return back()->with('success', 'Role Updated Successfully');
+        }
     }
 
     /**
@@ -127,10 +126,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-       if($role->delete())
-       {
-        return back()->with('success','Role Deleted Successfully');
-       }
+        if ($role->delete()) {
+            return back()->with('success', 'Role Deleted Successfully');
+        }
     }
 
 

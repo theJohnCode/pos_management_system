@@ -47,7 +47,7 @@
             </div>
             <p class="text-muted">
                 @foreach (Auth::user()->role as $roles)
-                    {{ $roles->name }},
+                    {{ $roles->name }}
                 @endforeach
             </p>
 
@@ -125,7 +125,6 @@
                         </ul>
                     </li>
                 @endcan
-
 
 
                 @can('view-user', User::class)
@@ -210,6 +209,22 @@
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="{{ route('brand.index') }}">View</a></li>
                             <li><a href="{{ route('brand.create') }}">Create</a></li>
+                            {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
+                        </ul>
+                    </li>
+                @endcan
+                @can('view-barcode', User::class)
+                    {{-- expr --}}
+
+                    <li>
+                        <a href="javascript: void(0);">
+                            <i class="ti-flag"></i>
+                            <span>Print Barcode</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="false">
+                            <li><a href="{{ route('barcode.index') }}">View</a></li>
+                            {{-- <li><a href="{{ route('brand.create') }}">Create</a></li> --}}
                             {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
                         </ul>
                     </li>

@@ -18,10 +18,10 @@ class Productfilters extends Migration
             $table->string('name');
             $table->string('brand');
             $table->string('price');
-            $table->string('ram');
-            $table->string('storage');
-            $table->string('camera');
-            $table->string('image');
+            // $table->string('ram');
+            // $table->string('storage');
+            // $table->string('camera');
+            $table->string('image')->nullable();
             $table->string('quantity');
             $table->string('status');
             $table->timestamps();

@@ -3,21 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class ProductController extends Controller
 {
-      public function __construct(){
+    public function __construct()
+    {
 
-        $this->middleware('permission:view-product',['only' => ['index']]);
-        $this->middleware('permission:create-product',['only' => ['create','store']]);
-        $this->middleware('permission:update-product',['only' => ['edit','update']]);
-        $this->middleware('permission:delete-product',['only' => ['destroy']]);
-
+        $this->middleware('permission:view-product', ['only' => ['index']]);
+        $this->middleware('permission:create-product', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-product', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-product', ['only' => ['destroy']]);
     }
-     
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         $products  = Product::paginate(10);
-        return view('backend.product.index',compact('products'));
+        return view('backend.product.index', compact('products'));
     }
 
     /**
@@ -37,7 +38,7 @@ class ProductController extends Controller
     public function create()
     {
         $category = Category::all();
-        return view('backend.product.create',compact('category'));
+        return view('backend.product.create', compact('category'));
     }
 
     /**
@@ -48,7 +49,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        $product_code = rand(100000, 9000000);
+
+        $generator = new BarcodeGeneratorPNG();
+        $barCode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($product_code, $generator::TYPE_CODE_128,2,80)) . '" >';
+        // $generator = new BarcodeGeneratorHTML();
+        // $barCode = $generator->getBarcode($product_code, $generator::TYPE_STANDARD_2_5);
+
         $request->validate([
             'name' => 'required',
             'desc' => 'required',
@@ -60,14 +67,11 @@ class ProductController extends Controller
             'status' => 'required'
         ]);
 
-         if($request->status)
-           {
-                $status = 1;
-           }
-           else
-           {
+        if ($request->status) {
+            $status = 1;
+        } else {
             $status = 0;
-           }
+        }
 
         $result = Product::create([
             'name' => $request->name,
@@ -75,19 +79,18 @@ class ProductController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity,
             'tax' => $request->tax,
+            'product_code' => $product_code,
+            'bar_code' => $barCode,
             'category_id' => $request->category_id,
             'brand_id' => $request->brands,
             'status' => $status,
 
         ]);
 
-        if($result)
-        {
-            return back()->with('success','Product Added Successfully');
-        }
-        else
-        {
-            return back()->with('success','Whoops! Something went wrong please try again.');
+        if ($result) {
+            return back()->with('success', 'Product Added Successfully');
+        } else {
+            return back()->with('success', 'Whoops! Something went wrong please try again.');
         }
     }
 
@@ -111,7 +114,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $category = Category::all();
-        return view('backend.product.create',compact('product','category'));
+        return view('backend.product.create', compact('product', 'category'));
     }
 
     /**
@@ -124,7 +127,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // dd($request->all());
-           $request->validate([
+        $request->validate([
             'name' => 'required',
             'desc' => 'required',
             'price' => 'required',
@@ -132,34 +135,28 @@ class ProductController extends Controller
             'tax' => 'required|integer',
             'category_id' => 'required|integer',
             'brands' => 'required|integer',
-            
+
         ]);
-            if($request->status)
-           {
-                $status = 1;
-           }
-           else
-           {
+        if ($request->status) {
+            $status = 1;
+        } else {
             $status = 0;
-           }
+        }
 
-            $product->name = $request->name;
-            $product->description = $request->desc;
-            $product->price = $request->price;
-            $product->quantity = $request->quantity;
-            $product->tax = $request->tax;
-            $product->category_id = $request->category_id;
-            $product->brand_id = $request->brands;
-            $product->status = $status;
+        $product->name = $request->name;
+        $product->description = $request->desc;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->tax = $request->tax;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brands;
+        $product->status = $status;
 
-            if($product->update())
-            {
-                return back()->with('success','Product updated Successfully');
-            }
-            else
-            {
-                return back()->with('success','Product cannot be updated. Try Again!');   
-            }
+        if ($product->update()) {
+            return back()->with('success', 'Product updated Successfully');
+        } else {
+            return back()->with('success', 'Product cannot be updated. Try Again!');
+        }
     }
 
     /**
@@ -170,23 +167,19 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        
-        if($product->delete())
-        {
-            return back()->with("success",'Product Deleted Successfully');
-        }
-        else
-        {
-            return back()->with('success','Product cannot be deleted now..!!');
+
+        if ($product->delete()) {
+            return back()->with("success", 'Product Deleted Successfully');
+        } else {
+            return back()->with('success', 'Product cannot be deleted now..!!');
         }
     }
 
 
     public function category_brands($category)
     {
-       
-            $brands = Brand::where('category_id' ,'=', $category)->get();
-            return response()->json($brands);
-        
+
+        $brands = Brand::where('category_id', '=', $category)->get();
+        return response()->json($brands);
     }
 }

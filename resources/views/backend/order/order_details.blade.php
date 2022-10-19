@@ -145,7 +145,7 @@
 
 <script>
     $(document).ready(function(){
-       $('#print').click(function(){
+		$('#print').click(function(){
         $(this).hide();
         event.preventDefault();
             window.print();

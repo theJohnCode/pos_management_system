@@ -45,7 +45,7 @@ class HomeController extends Controller
         // dd($revenue_today);
 
         $products = count(Product::where('quantity', '>', 0)
-            ->orWhere('status', '=', 'active')
+            ->orWhere('status', '=', 1)
             ->get());
 
         return view('backend.index', compact('user', 'dailysales', 'revenue_today', 'products'));

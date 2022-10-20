@@ -109,10 +109,10 @@
 
 
     <!-- Vendor js -->
-    <script src="{{asset('theme/assets/js/vendor.min.js')}}"></script>
+    <script src="{{secure_asset('theme/assets/js/vendor.min.js')}}"></script>
 
     <!-- App js -->
-    <script src="{{asset('theme/assets/js/app.min.js')}}"></script>
+    <script src="{{secure_asset('theme/assets/js/app.min.js')}}"></script>
 
 </body>
 

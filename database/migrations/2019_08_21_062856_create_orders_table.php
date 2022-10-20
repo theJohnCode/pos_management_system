@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
-            $table->string('total_amount');
+            $table->integer('total_amount');
             $table->string('discount');
             $table->enum('payment_method',['cash','card','transfer','cheque']);
             $table->enum('order_status',['successful','pending','failed']);

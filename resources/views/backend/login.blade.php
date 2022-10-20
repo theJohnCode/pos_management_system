@@ -32,10 +32,10 @@
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="text-center">
                         <a href="/" style="font-size:28px;">
-                            {{-- <span><img src="{{asset('theme/assets/images/logo-dark.png')}}" alt="" height="22"></span> --}}
-                            LOGO
+                            <span><img src="{{asset('theme/assets/images/logo-dark.png')}}" alt="" height="22"></span>
+                            {{-- LOGO --}}
                         </a>
-                        <p class="text-muted mt-2 mb-4">Responsive Admin Dashboard</p>
+                        <p class="text-muted mt-2 mb-4">Login</p>
                     </div>
                     <div class="card">
 

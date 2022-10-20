@@ -19,3 +19,9 @@ blocks:
             - mkdir -p database
             - touch database/database.sqlite
             - ./vendor/bin/phpunit
+after_pipeline:
+  task:
+    jobs:
+      - name: 'Job #1'
+        commands:
+          - sem-version php 7.3

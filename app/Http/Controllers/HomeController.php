@@ -39,15 +39,16 @@ class HomeController extends Controller
         );
 
         $revenue_today =  DB::table('orders')
-            ->selectRaw('sum(total_amount)')
             ->whereDate('created_at', Carbon::today())
-            ->pluck('sum(total_amount)');
+            ->sum('total_amount');
             
+        dd($revenue_today);
+
         $products = count(Product::where('quantity', '>', 0)
             ->orWhere('status', '=', 'active')
             ->get());
 
-            // dd($revenue_today);
+        // dd($revenue_today);
         // dd($products);
 
 

@@ -42,16 +42,11 @@ class HomeController extends Controller
             ->whereDate('created_at', Carbon::today())
             ->sum('total_amount');
             
-        dd($revenue_today);
+        // dd($revenue_today);
 
         $products = count(Product::where('quantity', '>', 0)
             ->orWhere('status', '=', 'active')
             ->get());
-
-        // dd($revenue_today);
-        // dd($products);
-
-
 
         return view('backend.index', compact('user', 'dailysales', 'revenue_today', 'products'));
     }

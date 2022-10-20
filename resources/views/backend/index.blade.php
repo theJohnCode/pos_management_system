@@ -51,7 +51,7 @@
                                         </div> --}}
 
                             <div class="widget-detail-1 text-right">
-                                <h2 class="font-weight-normal pt-2 mb-1"> {{numberformat($revenue_today[0])}} </h2>
+                                <h2 class="font-weight-normal pt-2 mb-1"> {{numberformat($revenue_today)}} </h2>
                                 <p class="text-muted mb-1">Revenue today</p>
                             </div>
                         </div>

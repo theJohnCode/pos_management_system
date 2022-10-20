@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>{{ config('app.name') }} - Dashboard LOGIN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="POS login" name="description" />
+    <meta content="{{ config('app.name') }} login" name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->

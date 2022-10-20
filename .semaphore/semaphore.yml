@@ -4,10 +4,12 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
-
 blocks:
   - name: Test
     task:
+			prologue:
+        commands:
+          - sem-version php 8.1
       jobs:
         - name: Test
           commands:
@@ -16,7 +18,7 @@ blocks:
             - composer install
             - cache store
             - cp .env.example .env
-            - php artisan key:generate
+            - 'php artisan key:generate'
             - mkdir -p database
             - touch database/database.sqlite
             - ./vendor/bin/phpunit

@@ -24,4 +24,4 @@ after_pipeline:
     jobs:
       - name: 'Job #1'
         commands:
-          - sem-version php 7.3
+          - sem-version php 8.1

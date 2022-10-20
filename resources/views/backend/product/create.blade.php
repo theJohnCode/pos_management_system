@@ -35,7 +35,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" name="name" ="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" @if (isset($product->name)) value="{{$product->name}}" @else value="{{old('name')}}")
+                                            <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" @if (isset($product->name)) value="{{$product->name}}" @else value="{{old('name')}}")
                                                 
                                            
                                                 

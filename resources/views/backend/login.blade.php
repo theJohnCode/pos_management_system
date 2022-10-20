@@ -9,12 +9,12 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('theme/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{secure_asset('theme/assets/images/favicon.ico')}}">
 
     <!-- App css -->
-    <link href="{{asset('theme/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('theme/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('theme/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('theme/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('theme/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('theme/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
 </head>
 

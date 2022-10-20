@@ -25,16 +25,16 @@
 <div class="rightbar-overlay"></div>
 
 <!-- Vendor js -->
-<script src="{{secure_asset('theme/assets/js/vendor.min.js')}}"></script>
+<script src="{{asset('theme/assets/js/vendor.min.js')}}"></script>
 
-<script src="{{secure_asset('theme/assets/dist/js/bootstrap-datepicker.min.js')}}"></script>
-<script src="{{secure_asset('theme/assets/select2/dist/js/select2.min.js')}}"></script>
+<script src="{{asset('theme/assets/dist/js/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('theme/assets/select2/dist/js/select2.min.js')}}"></script>
 
 <!-- knob plugin -->
-<script src="{{secure_asset('theme/assets/libs/jquery-knob/jquery.knob.min.js')}}"></script>
+<script src="{{asset('theme/assets/libs/jquery-knob/jquery.knob.min.js')}}"></script>
 
 <!-- App js -->
-<script src="{{secure_asset('theme/assets/js/app.min.js')}}"></script>
+<script src="{{asset('theme/assets/js/app.min.js')}}"></script>
 
 @yield('scripts')
 <script>

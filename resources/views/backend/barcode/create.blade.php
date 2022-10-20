@@ -15,7 +15,7 @@
                             </div>
                         @endif
                         <form role="form"
-                            action=@if (isset($category)) "{{ route('category.update', $category->id) }}" @else() "{{ route('order.store') }}" @endif
+                            action={{ isset($category) ? "{{ route('category.update', $category->id) }}" : "{{ route('order.store') }}" }}
                             method="post">
                             @if (isset($category))
                                 @method('PUT')

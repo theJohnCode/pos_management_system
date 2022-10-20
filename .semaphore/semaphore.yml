@@ -19,6 +19,9 @@ blocks:
             - mkdir -p database
             - touch database/database.sqlite
             - ./vendor/bin/phpunit
-        - name: 'Job #2'
-          commands:
-            - sem-version php 8.1
+after_pipeline:
+  task:
+    jobs:
+      - name: 'Job #1'
+        commands:
+          - phpbrew use php-8.1.11

@@ -143,7 +143,7 @@ class OrderController extends Controller
     public static function fetch_products()
     {
         $products = Product::where('quantity', '>', 0)
-            ->where('status', 'active')
+            ->where('status', 1)
             ->get();
         // dd($products);
         $output = '';
@@ -157,7 +157,7 @@ class OrderController extends Controller
     public function fetch_single_product(Request $request)
     {
         $product = Product::where('id', $request->id)
-            ->where('status', 'active')
+            ->where('status', 1)
             ->get(['price', 'quantity']);
 
         // $product = DB::select('select price,quantity from products where status = active AND id = "' . $request->id . '"', [1]);

@@ -15,7 +15,7 @@ class BarcodeController extends Controller
     public function fetch_single_product(Request $request)
     {
         $product = Product::where('id', $request->id)
-            ->where('status', 'active')
+            ->where('status', 1)
             ->get(['name', 'bar_code', 'product_code']);
 
         return response()->json($product[0]);
@@ -31,7 +31,7 @@ class BarcodeController extends Controller
         // dd($request->all());
         $qty = $request->qty;
         $product = Product::where('id', $request->id)
-            ->where('status', 'active')
+            ->where('status', 1)
             ->get(['name', 'bar_code', 'product_code'])[0];
 
         return view('backend.barcode.print', compact('product', 'qty'));
